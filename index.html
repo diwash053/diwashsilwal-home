@@ -1,603 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diwash Silwal - Admin Panel</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <style>
-        /* Personal Color Scheme */
-        :root {
-            --primary: #2c3e50;    /* Dark blue */
-            --secondary: #3498db;   /* TU blue */
-            --accent: #e74c3c;      /* Red accent */
-            --light: #ecf0f1;       /* Light gray */
-            --dark: #2c3e50;        /* Dark text */
-            --success: #27ae60;     /* Green */
-            --danger: #e74c3c;      /* Red */
-            --warning: #f39c12;     /* Orange */
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Admin Panel Styling */
-        .admin-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-
-        .admin-btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-        }
-
-        .admin-btn:hover {
-            transform: scale(1.1);
-            background-color: var(--danger);
-        }
-
-        /* Modal Styling */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            width: 90%;
-            max-width: 400px;
-            overflow: hidden;
-        }
-
-        .modal-header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-danger {
-            background-color: var(--danger);
-            color: white;
-        }
-
-        /* Alert Messages */
-        .alert {
-            padding: 10px 15px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            color: white;
-        }
-
-        .alert-success {
-            background-color: var(--success);
-        }
-
-        .alert-danger {
-            background-color: var(--danger);
-        }
-
-        .alert-warning {
-            background-color: var(--warning);
-        }
-
-        /* PIN Input */
-        .pin-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .pin-input {
-            width: 45px;
-            height: 45px;
-            text-align: center;
-            font-size: 20px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .modal-content {
-                width: 95%;
-            }
-            
-            .pin-input {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr. Diwash Silwal | Personal Academic Portfolio</title>
+<style>
+  /* Reset and base styles */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f6fa;
+    color: #222;
+    user-select: none; /* Disable text selection globally */
+  }
+  a {
+    color: #026cdf;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  header {
+    background: linear-gradient(90deg, #1c3f94, #2c6ce4);
+    color: white;
+    padding: 1rem 1.5rem;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0.2rem 0;
+    font-weight: 700;
+  }
+  nav {
+    margin-top: 5px;
+  }
+  nav button {
+    background: #ffffff33;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 8px 16px;
+    margin: 0 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  nav button:hover {
+    background: #ffffff66;
+  }
+  main {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 15px 50px;
+  }
+  section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px #aaa3;
+  }
+  section h2 {
+    margin-top: 0;
+    color: #1c3f94;
+  }
+  /* Profile photo */
+  #profile-photo {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #2c6ce4;
+    display: block;
+    margin: 15px auto;
+  }
+  /* Admin login form */
+  #admin-login {
+    max-width: 360px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #2c6ce4;
+    border-radius: 8px;
+    color: white;
+  }
+  #admin-login input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  #admin-login button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    font-weight: 700;
+    background: white;
+    color: #2c6ce4;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+  }
+  #admin-login button:hover {
+    background: #cce0ff;
+  }
+  /* Hide elements */
+  .hidden {
+    display: none !important;
+  }
+  /* Editable text */
+  .editable {
+    border: 1px dashed #ddd;
+    padding: 6px;
+    border-radius: 4px;
+    margin-top: 8px;
+    min-height: 22px;
+  }
+  .editable:focus {
+    outline: 2px solid #2c6ce4;
+    background: #eef5ff;
+  }
+  /* Buttons inside content */
+  .btn-small {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    margin-left: 6px;
+    cursor: pointer;
+    border: 1px solid #2c6ce4;
+    border-radius: 4px;
+    background: #f0f6fa;
+  }
+  .btn-small:hover {
+    background: #cce0ff;
+  }
+  /* Toggle public/private badges */
+  .visibility-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 2px 7px;
+    border-radius: 12px;
+    color: white;
+    margin-left: 10px;
+  }
+  .public-badge {
+    background-color: #28a745;
+  }
+  .private-badge {
+    background-color: #dc3545;
+  }
+  /* Side business images */
+  .business-img {
+    max-width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 5px 10px 10px 0;
+    border: 1px solid #ccc;
+  }
+  /* External links */
+  #external-links ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  #external-links li {
+    margin-bottom: 8px;
+  }
+  /* Prevent right click on entire body except admin login */
+  body.norightclick *:not(#admin-login):not(#admin-login *) {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none;
+  }
+  body.norightclick {
+    -webkit-touch-callout: none;
+  }
+</style>
 </head>
-<body>
-    <!-- Your Personal Website Content Goes Here -->
-    <div class="personal-website">
-        <!-- Your existing personal website content -->
-        <h1>Welcome to Diwash Silwal's Website</h1>
-        <p>Physics Researcher | Educator | Developer</p>
-        <!-- More content... -->
+<body class="norightclick">
+
+<header>
+  <h1>Mr. Diwash Silwal</h1>
+  <p>M.Sc. Physics | Atmospheric & Biomedical Physics</p>
+  <nav id="nav-buttons" class="hidden">
+    <button onclick="showSection('education')">Education</button>
+    <button onclick="showSection('blogs')">Blogs</button>
+    <button onclick="showSection('research')">Research Papers</button>
+    <button onclick="showSection('notes')">Lecture Notes</button>
+    <button onclick="showSection('projects')">Projects</button>
+    <button onclick="showSection('sidebusiness')">Side Business</button>
+    <button onclick="showSection('externallinks')">External Links</button>
+    <button onclick="logoutAdmin()" style="background:#dc3545;color:#fff;">Logout</button>
+  </nav>
+</header>
+
+<!-- Profile Photo -->
+<section id="profile-section" class="hidden">
+  <img id="profile-photo" src="https://via.placeholder.com/140" alt="Profile Photo" />
+  <input type="file" id="profile-upload" accept="image/*" class="hidden" />
+  <button id="change-photo-btn" class="btn-small hidden">Change Photo</button>
+</section>
+
+<!-- Admin Login Form -->
+<section id="admin-login">
+  <h2>Admin Login</h2>
+  <input type="text" id="username" placeholder="Username" autocomplete="username" />
+  <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+  <button onclick="loginAdmin()">Login</button>
+  <p id="login-error" style="color:#ffcccc; margin-top: 10px; display:none;">Invalid credentials!</p>
+</section>
+
+<main>
+
+  <!-- Education Section -->
+  <section id="education" class="hidden">
+    <h2>Education
+      <button class="btn-small" onclick="toggleEdit('education-list')">Edit</button>
+    </h2>
+    <ul id="education-list">
+      <li data-visible="true">M.Sc. Physics - Tribhuvan University</li>
+      <li data-visible="true">B.Sc. Physics + Mathematics - Tribhuvan University</li>
+      <li data-visible="false" class="hidden">+2 Science - Damak Multiple Campus</li>
+    </ul>
+  </section>
+
+  <!-- Blogs Section -->
+  <section id="blogs" class="hidden">
+    <h2>Blogs
+      <button class="btn-small" onclick="toggleEdit('blogs-list')">Edit</button>
+    </h2>
+    <ul id="blogs-list">
+      <li data-visible="true"><strong>Recent Advances in Atmospheric Physics</strong><br/>Published June 2025</li>
+      <li data-visible="false" class="hidden"><strong>Biomedical Physics and Its Applications</strong><br/>Published May 2025</li>
+    </ul>
+  </section>
+
+  <!-- Research Papers Section -->
+  <section id="research" class="hidden">
+    <h2>Research Papers
+      <button class="btn-small" onclick="toggleEdit('research-list')">Edit</button>
+    </h2>
+    <ul id="research-list">
+      <li data-visible="true"><a href="#" onclick="alert('PDF preview will open')">Urban Heat Island Effect in Jhapa District (PDF)</a></li>
+      <li data-visible="false" class="hidden"><a href="#">Atmospheric Aerosols and Climate Change (PDF)</a></li>
+    </ul>
+  </section>
+
+  <!-- Lecture Notes Section -->
+  <section id="notes" class="hidden">
+    <h2>Lecture Notes
+      <button class="btn-small" onclick="toggleEdit('notes-list')">Edit</button>
+    </h2>
+    <ul id="notes-list">
+      <li data-visible="true">Thermodynamics - School Level</li>
+      <li data-visible="true">Linear Algebra - +2 Science</li>
+      <li data-visible="false" class="hidden">Quantum Mechanics - B.Sc. Level</li>
+    </ul>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="hidden">
+    <h2>Projects
+      <button class="btn-small" onclick="toggleEdit('projects-list')">Edit</button>
+    </h2>
+    <ul id="projects-list">
+      <li data-visible="true">Machine Learning for Temperature Prediction<br/>
+        <a href="#" onclick="alert('Video preview will open')">Project Video</a> | 
+        <a href="#" onclick="alert('PDF report will open')">PDF Report</a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Side Business Section -->
+  <section id="sidebusiness" class="hidden">
+    <h2>Side Business</h2>
+    <div>
+      <h3>Shree Ambe Bhawani Gharelu Udhyog</h3>
+      <img src="https://via.placeholder.com/140x100?text=Chips" alt="Chips" class="business-img" />
+      <img src="https://via.placeholder.com/140x100?text=Masala" alt="Masala" class="business-img" />
+      <img src="https://via.placeholder.com/140x100?text=Packaging" alt="Packaging" class="business-img" />
+      <p>Manufacturer of chips, masala, and packaging products.</p>
     </div>
-
-    <!-- Admin Panel Floating Button -->
-    <div class="admin-panel">
-        <button class="admin-btn" id="adminToggleBtn" title="Admin Panel">
-            <i class="fas fa-user-shield"></i>
-        </button>
+    <div>
+      <h3>RK Traders</h3>
+      <img src="https://via.placeholder.com/140x100?text=Kirana" alt="Kirana" class="business-img" />
+      <p>Kirana Distributor & Dealer.</p>
     </div>
+  </section>
 
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Admin Login</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="loginAlerts"></div>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="loginUsername">Username</label>
-                        <input type="text" id="loginUsername" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
-            </div>
-        </div>
-    </div>
+  <!-- External Links Section -->
+  <section id="externallinks" class="hidden">
+    <h2>External Links
+      <button class="btn-small" onclick="toggleEdit('links-list')">Edit</button>
+    </h2>
+    <ul id="links-list">
+      <li data-visible="true"><a href="https://scholar.google.com/citations?user=YOUR_USER_ID" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
+      <li data-visible="true"><a href="https://linkedin.com/in/diwash-silwal-44b541243" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li data-visible="false" class="hidden"><a href="https://researchgate.net/profile/diwash_silwal" target="_blank" rel="noopener noreferrer">ResearchGate</a></li>
+    </ul>
+  </section>
 
-    <!-- PIN Verification Modal -->
-    <div class="modal" id="pinModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>PIN Verification</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="pinAlerts"></div>
-                <p>Enter your 4-digit verification PIN:</p>
-                <div class="pin-container">
-                    <input type="number" class="pin-input" maxlength="1" data-index="0">
-                    <input type="number" class="pin-input" maxlength="1" data-index="1">
-                    <input type="number" class="pin-input" maxlength="1" data-index="2">
-                    <input type="number" class="pin-input" maxlength="1" data-index="3">
-                </div>
-                <button type="button" class="btn btn-primary" id="verifyPinBtn">Verify</button>
-            </div>
-        </div>
-    </div>
+</main>
 
-    <!-- Admin Dashboard Modal -->
-    <div class="modal" id="adminModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Diwash's Admin Dashboard</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="adminAlerts"></div>
-                <div class="admin-options">
-                    <button class="btn btn-primary" id="changeCredsBtn">
-                        <i class="fas fa-key"></i> Change Credentials
-                    </button>
-                    <button class="btn btn-danger" id="logoutBtn">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
-                </div>
-                <div id="sessionTimer">Session: 10:00 remaining</div>
-            </div>
-        </div>
-    </div>
+<script>
+  // Simple admin login system (front-end only)
+  const ADMIN_USERNAME = 'diwash053';
+  const ADMIN_PASSWORD = 'dis@2053';
 
-    <!-- Change Credentials Modal -->
-    <div class="modal" id="changeCredsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Change Credentials</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="credsAlerts"></div>
-                <form id="changeCredsForm">
-                    <div class="form-group">
-                        <label for="currentPassword">Current Password</label>
-                        <input type="password" id="currentPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newUsername">New Username</label>
-                        <input type="text" id="newUsername" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">New Password</label>
-                        <input type="password" id="newPassword" required 
-                               pattern="^(?=.*[A-Za-z])(?=.*\d).{8,}$"
-                               title="8+ chars with 1 letter & 1 number">
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <button type="button" class="btn" onclick="hideModal('changeCredsModal')">Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
+  // State
+  let isAdmin = false;
 
-    <!-- Font Awesome for icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  function loginAdmin() {
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value.trim();
+    const err = document.getElementById('login-error');
+    if (u === ADMIN_USERNAME && p === ADMIN_PASSWORD) {
+      isAdmin = true;
+      err.style.display = 'none';
+      document.getElementById('admin-login').classList.add('hidden');
+      document.getElementById('nav-buttons').classList.remove('hidden');
+      document.getElementById('profile-section').classList.remove('hidden');
+      showSection('education');
+      // Show edit buttons for admin
+      showEditButtons(true);
+      // Enable right click and text select for admin only
+      document.body.classList.remove('norightclick');
+    } else {
+      err.style.display = 'block';
+    }
+  }
 
-    <script>
-    // ==========================================
-    // PERSONALIZED ADMIN PANEL FOR DIWASH SILWAL
-    // ==========================================
+  function logoutAdmin() {
+    isAdmin = false;
+    document.getElementById('admin-login').classList.remove('hidden');
+    document.getElementById('nav-buttons').classList.add('hidden');
+    document.getElementById('profile-section').classList.add('hidden');
+    hideAllSections();
+    // Hide edit buttons
+    showEditButtons(false);
+    // Disable right click and text select for visitors
+    document.body.classList.add('norightclick');
+    // Clear login form
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+  }
 
-    // Security Configuration
-    const SECURITY = {
-        encryptionKey: "DiwashCDP@795511TU", // Personalized encryption key
-        sessionTimeout: 10 * 60 * 1000, // 10 minutes
-        maxAttempts: 5,
-        lockoutTime: 5 * 60 * 1000, // 5 minutes
-        pinLength: 4
-    };
-
-    // Admin State
-    const adminState = {
-        isLoggedIn: false,
-        loginAttempts: 0,
-        lastAttempt: 0,
-        sessionTimer: null,
-        inactivityTimer: null,
-        currentPin: null
-    };
-
-    // Initialize Admin Panel
-    document.addEventListener('DOMContentLoaded', function() {
-        // Setup event listeners
-        document.getElementById('adminToggleBtn').addEventListener('click', toggleAdminPanel);
-        document.querySelectorAll('.close-modal').forEach(btn => {
-            btn.addEventListener('click', function() {
-                hideModal(this.closest('.modal').id);
-            });
-        });
-
-        // PIN input handling
-        document.querySelectorAll('.pin-input').forEach(input => {
-            input.addEventListener('input', function() {
-                if (this.value.length === 1) {
-                    const nextIndex = parseInt(this.dataset.index) + 1;
-                    const nextInput = document.querySelector(`.pin-input[data-index="${nextIndex}"]`);
-                    if (nextInput) nextInput.focus();
-                }
-            });
-        });
-
-        // Form submissions
-        document.getElementById('loginForm').addEventListener('submit', handleLogin);
-        document.getElementById('verifyPinBtn').addEventListener('click', verifyPin);
-        document.getElementById('changeCredsForm').addEventListener('submit', handleChangeCredentials);
-        document.getElementById('logoutBtn').addEventListener('click', logout);
-        document.getElementById('changeCredsBtn').addEventListener('click', () => {
-            showModal('changeCredsModal');
-        });
-
-        // Activity tracking
-        document.addEventListener('mousemove', resetInactivityTimer);
-        document.addEventListener('keypress', resetInactivityTimer);
-
-        // Check for existing session
-        if (sessionStorage.getItem('diwashAdminLoggedIn') === 'true') {
-            showModal('adminModal');
-            startSessionTimer();
-        }
+  function showSection(id) {
+    hideAllSections();
+    const sec = document.getElementById(id);
+    if (sec) {
+      sec.classList.remove('hidden');
+    }
+  }
+  function hideAllSections() {
+    ['education','blogs','research','notes','projects','sidebusiness','externallinks'].forEach(id => {
+      const sec = document.getElementById(id);
+      if (sec) sec.classList.add('hidden');
     });
+  }
 
-    // Security Functions
-    function encrypt(data) {
-        return CryptoJS.AES.encrypt(data, SECURITY.encryptionKey).toString();
+  // Toggle edit mode for lists
+  function toggleEdit(listId) {
+    if (!isAdmin) return;
+    const list = document.getElementById(listId);
+    if (!list) return;
+    if (list.contentEditable === 'true') {
+      list.contentEditable = 'false';
+      alert('Edit mode disabled. Changes saved in browser session only.');
+    } else {
+      list.contentEditable = 'true';
+      alert('Edit mode enabled. You can now edit content directly.');
     }
+  }
 
-    function decrypt(encryptedData) {
-        try {
-            const bytes = CryptoJS.AES.decrypt(encryptedData, SECURITY.encryptionKey);
-            return bytes.toString(CryptoJS.enc.Utf8);
-        } catch (e) {
-            return null;
-        }
-    }
+  // Profile photo change
+  const profileUpload = document.getElementById('profile-upload');
+  const profilePhoto = document.getElementById('profile-photo');
+  const changePhotoBtn = document.getElementById('change-photo-btn');
 
-    // Modal Controls
-    function toggleAdminPanel() {
-        if (sessionStorage.getItem('diwashAdminLoggedIn') === 'true') {
-            showModal('adminModal');
-        } else {
-            showModal('loginModal');
-        }
-    }
+  changePhotoBtn.addEventListener('click', () => {
+    profileUpload.click();
+  });
 
-    function showModal(modalId) {
-        document.getElementById(modalId).style.display = 'flex';
-        if (modalId === 'loginModal') {
-            document.getElementById('loginUsername').focus();
-        } else if (modalId === 'pinModal') {
-            document.querySelector('.pin-input[data-index="0"]').focus();
-        }
-    }
+  profileUpload.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePhoto.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
 
-    function hideModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-        document.getElementById(modalId.replace('Modal', 'Alerts')).innerHTML = '';
-    }
-
-    // Login Functions
-    function handleLogin(e) {
-        e.preventDefault();
-
-        // Check if account is locked
-        if (isAccountLocked()) {
-            showAlert('loginAlerts', `Account locked. Try again in ${getRemainingLockoutTime()} minutes.`, 'danger');
-            return;
-        }
-
-        const username = document.getElementById('loginUsername').value;
-        const password = document.getElementById('loginPassword').value;
-
-        // Get stored credentials
-        const storedCreds = localStorage.getItem('diwashAdminCreds');
-        if (!storedCreds) {
-            // First-time setup with default credentials
-            const defaultCreds = encrypt(JSON.stringify({
-                username: 'diwash',
-                password: 'CDP@795511' // Personalized default password
-            }));
-            localStorage.setItem('diwashAdminCreds', defaultCreds);
-            showAlert('loginAlerts', 'Default credentials created. Username: diwash, Password: CDP@795511', 'warning');
-            return;
-        }
-
-        // Verify credentials
-        const creds = JSON.parse(decrypt(storedCreds));
-        if (creds && creds.username === username && creds.password === password) {
-            // Successful login
-            adminState.loginAttempts = 0;
-            generatePin();
-            document.getElementById('loginForm').reset();
-            hideModal('loginModal');
-            showModal('pinModal');
-        } else {
-            // Failed login
-            adminState.loginAttempts++;
-            adminState.lastAttempt = Date.now();
-            localStorage.setItem('diwashLastAttempt', adminState.lastAttempt);
-
-            const remaining = SECURITY.maxAttempts - adminState.loginAttempts;
-            if (remaining > 0) {
-                showAlert('loginAlerts', `Invalid credentials. ${remaining} attempts remaining.`, 'danger');
-            } else {
-                showAlert('loginAlerts', `Account locked. Try again in ${getRemainingLockoutTime()} minutes.`, 'danger');
-            }
-        }
-    }
-
-    function isAccountLocked() {
-        if (adminState.loginAttempts >= SECURITY.maxAttempts) {
-            const lockoutRemaining = SECURITY.lockoutTime - (Date.now() - adminState.lastAttempt);
-            return lockoutRemaining > 0;
-        }
-        return false;
-    }
-
-    function getRemainingLockoutTime() {
-        const lockoutRemaining = SECURITY.lockoutTime - (Date.now() - adminState.lastAttempt);
-        return Math.ceil(lockoutRemaining / (60 * 1000));
-    }
-
-    // PIN Functions
-    function generatePin() {
-        adminState.currentPin = '';
-        for (let i = 0; i < SECURITY.pinLength; i++) {
-            adminState.currentPin += Math.floor(Math.random() * 10);
-        }
-        sessionStorage.setItem('diwashCurrentPin', adminState.currentPin);
-    }
-
-    function verifyPin() {
-        const enteredPin = Array.from(document.querySelectorAll('.pin-input'))
-            .map(input => input.value)
-            .join('');
-
-        const expectedPin = adminState.currentPin || sessionStorage.getItem('diwashCurrentPin');
-
-        if (enteredPin === expectedPin) {
-            // Successful verification
-            sessionStorage.setItem('diwashAdminLoggedIn', 'true');
-            adminState.isLoggedIn = true;
-            startSessionTimer();
-            document.querySelectorAll('.pin-input').forEach(input => input.value = '');
-            hideModal('pinModal');
-            showModal('adminModal');
-        } else {
-            // Invalid PIN
-            showAlert('pinAlerts', 'Invalid PIN. Please try again.', 'danger');
-            document.querySelectorAll('.pin-input').forEach(input => input.value = '');
-            document.querySelector('.pin-input[data-index="0"]').focus();
-        }
-    }
-
-    // Session Management
-    function startSessionTimer() {
-        clearInterval(adminState.sessionTimer);
-        const endTime = Date.now() + SECURITY.sessionTimeout;
-        sessionStorage.setItem('diwashSessionEnd', endTime);
-
-        updateSessionTimer();
-        adminState.sessionTimer = setInterval(updateSessionTimer, 1000);
-    }
-
-    function updateSessionTimer() {
-        const remaining = parseInt(sessionStorage.getItem('diwashSessionEnd')) - Date.now();
-        
-        if (remaining <= 0) {
-            logout();
-            return;
-        }
-
-        const mins = Math.floor(remaining / (60 * 1000));
-        const secs = Math.floor((remaining % (60 * 1000)) / 1000);
-        document.getElementById('sessionTimer').textContent = `Session: ${mins}:${secs.toString().padStart(2, '0')} remaining`;
-    }
-
-    function resetInactivityTimer() {
-        clearTimeout(adminState.inactivityTimer);
-        adminState.inactivityTimer = setTimeout(logout, SECURITY.sessionTimeout);
-    }
-
-    function logout() {
-        clearInterval(adminState.sessionTimer);
-        clearTimeout(adminState.inactivityTimer);
-        sessionStorage.removeItem('diwashAdminLoggedIn');
-        sessionStorage.removeItem('diwashCurrentPin');
-        sessionStorage.removeItem('diwashSessionEnd');
-        adminState.isLoggedIn = false;
-        hideModal('adminModal');
-        hideModal('pinModal');
-        showAlert('loginAlerts', 'You have been logged out', 'success');
-    }
-
-    // Credential Management
-    function handleChangeCredentials(e) {
-        e.preventDefault();
-
-        const currentPass = document.getElementById('currentPassword').value;
-        const newUser = document.getElementById('newUsername').value;
-        const newPass = document.getElementById('newPassword').value;
-        const confirmPass = document.getElementById('confirmPassword').value;
-
-        // Validate current password
-        const storedCreds = JSON.parse(decrypt(localStorage.getItem('diwashAdminCreds')));
-        if (storedCreds.password !== currentPass) {
-            showAlert('credsAlerts', 'Current password is incorrect', 'danger');
-            return;
-        }
-
-        // Validate new password
-        if (newPass !== confirmPass) {
-            showAlert('credsAlerts', 'New passwords do not match', 'danger');
-            return;
-        }
-
-        if (!/(?=.*[A-Za-z])(?=.*\d).{8,}/.test(newPass)) {
-            showAlert('credsAlerts', 'Password must be 8+ chars with 1 letter and 1 number', 'danger');
-            return;
-        }
-
-        // Save new credentials
-        const encryptedCreds = encrypt(JSON.stringify({
-            username: newUser,
-            password: newPass
-        }));
-        localStorage.setItem('diwashAdminCreds', encryptedCreds);
-
-        showAlert('credsAlerts', 'Credentials updated successfully!', 'success');
-        setTimeout(() => {
-            hideModal('changeCredsModal');
-            document.getElementById('changeCredsForm').reset();
-        }, 1500);
-    }
-
-    // UI Helpers
-    function showAlert(containerId, message, type) {
-        const container = document.getElementById(containerId);
-        const alert = document.createElement('div');
-        alert.className = `alert alert-${type}`;
-        alert.textContent = message;
-        container.appendChild(alert);
-
-        setTimeout(() => {
-            alert.remove();
-        }, 5000);
-    }
-
-    // Prevent DevTools opening
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12' || 
-            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
-            e.preventDefault();
-            showAlert('loginAlerts', 'Developer tools are disabled for security', 'danger');
-        }
+  // Show change photo button only for admin
+  function showEditButtons(show) {
+    const buttons = document.querySelectorAll('.btn-small');
+    buttons.forEach(btn => {
+      btn.style.display = show ? 'inline-block' : 'none';
     });
-    </script>
+    changePhotoBtn.style.display = show ? 'inline-block' : 'none';
+  }
+
+  // Initialize page for visitor mode (disable right-click etc)
+  document.body.classList.add('norightclick');
+
+  // Prevent right-click context menu for visitors only
+  document.addEventListener('contextmenu', function(e) {
+    if (!isAdmin) e.preventDefault();
+  });
+
+  // Disable drag and drop of images and text for visitors
+  document.addEventListener('dragstart', function(e) {
+    if (!isAdmin) e.preventDefault();
+  });
+</script>
+
 </body>
 </html>
