@@ -3,418 +3,418 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mr. Diwash Silwal | Personal Academic Portfolio</title>
+<title>Mr. Diwash Silwal | Academic Portfolio</title>
 <style>
-  /* Reset and base styles */
+  /* Reset & base */
   * {
     box-sizing: border-box;
   }
   body {
     margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f6fa;
+    font-family: 'Poppins', sans-serif;
+    background: #f9fbff;
     color: #222;
-    user-select: none; /* Disable text selection globally */
-  }
-  a {
-    color: #026cdf;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
+    min-height: 100vh;
   }
   header {
-    background: linear-gradient(90deg, #1c3f94, #2c6ce4);
+    background: linear-gradient(90deg, #0057b8, #0091ea);
     color: white;
-    padding: 1rem 1.5rem;
-    text-align: center;
+    padding: 18px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.15);
   }
   header h1 {
-    margin: 0.2rem 0;
+    margin: 0;
     font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 1.2px;
   }
-  nav {
-    margin-top: 5px;
+  #login-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  nav button {
-    background: #ffffff33;
+  #login-area input {
+    padding: 7px 10px;
+    border-radius: 6px;
     border: none;
-    color: white;
-    font-weight: 600;
+    font-size: 1rem;
+    width: 130px;
+  }
+  #login-area button {
+    background: white;
+    color: #007bff;
+    border: none;
+    font-weight: 700;
     padding: 8px 16px;
-    margin: 0 6px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  nav button:hover {
-    background: #ffffff66;
+  #login-area button:hover {
+    background: #cce5ff;
+  }
+  #logout-btn {
+    background: #dc3545 !important;
+    color: white !important;
+  }
+  nav {
+    background: #fff;
+    padding: 12px 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 60px;
+    z-index: 900;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  nav button {
+    padding: 10px 18px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #007bff;
+    background: #e8f0fe;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+  nav button:hover, nav button.active {
+    background: #007bff;
+    color: white;
   }
   main {
     max-width: 960px;
-    margin: 20px auto;
-    padding: 0 15px 50px;
+    margin: 25px auto;
+    padding: 0 15px 60px;
   }
   section {
     background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 6px;
-    box-shadow: 0 0 12px #aaa3;
+    border-radius: 14px;
+    padding: 25px 30px;
+    margin-bottom: 35px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease;
+  }
+  section:hover {
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
   }
   section h2 {
-    margin-top: 0;
-    color: #1c3f94;
+    margin: 0 0 20px;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: #004085;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  /* Profile photo */
-  #profile-photo {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid #2c6ce4;
-    display: block;
-    margin: 15px auto;
-  }
-  /* Admin login form */
-  #admin-login {
-    max-width: 360px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #2c6ce4;
-    border-radius: 8px;
-    color: white;
-  }
-  #admin-login input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 12px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  #admin-login button {
-    margin-top: 15px;
-    width: 100%;
-    padding: 12px;
-    font-weight: 700;
-    background: white;
-    color: #2c6ce4;
-    border-radius: 6px;
+  .edit-btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
     cursor: pointer;
-    border: none;
-  }
-  #admin-login button:hover {
-    background: #cce0ff;
-  }
-  /* Hide elements */
-  .hidden {
-    display: none !important;
-  }
-  /* Editable text */
-  .editable {
-    border: 1px dashed #ddd;
-    padding: 6px;
-    border-radius: 4px;
-    margin-top: 8px;
-    min-height: 22px;
-  }
-  .editable:focus {
-    outline: 2px solid #2c6ce4;
-    background: #eef5ff;
-  }
-  /* Buttons inside content */
-  .btn-small {
-    font-size: 0.85rem;
-    padding: 5px 10px;
-    margin-left: 6px;
-    cursor: pointer;
-    border: 1px solid #2c6ce4;
-    border-radius: 4px;
-    background: #f0f6fa;
-  }
-  .btn-small:hover {
-    background: #cce0ff;
-  }
-  /* Toggle public/private badges */
-  .visibility-badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    padding: 2px 7px;
-    border-radius: 12px;
-    color: white;
-    margin-left: 10px;
-  }
-  .public-badge {
-    background-color: #28a745;
-  }
-  .private-badge {
-    background-color: #dc3545;
-  }
-  /* Side business images */
-  .business-img {
-    max-width: 140px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin: 5px 10px 10px 0;
-    border: 1px solid #ccc;
-  }
-  /* External links */
-  #external-links ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  #external-links li {
-    margin-bottom: 8px;
-  }
-  /* Prevent right click on entire body except admin login */
-  body.norightclick *:not(#admin-login):not(#admin-login *) {
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    background: #e8f0fe;
+    color: #007bff;
     user-select: none;
+    display: none; /* show only after admin login */
+    transition: background 0.3s ease;
   }
-  body.norightclick {
-    -webkit-touch-callout: none;
+  .edit-btn:hover {
+    background: #007bff;
+    color: white;
+  }
+  ul {
+    padding-left: 20px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  li {
+    margin-bottom: 12px;
+  }
+  [contenteditable="true"] {
+    outline: 3px solid #007bff;
+    background: #d9e9ff;
+    border-radius: 6px;
+    padding: 6px 12px;
+  }
+  #profile-cover-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  #cover-photo {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 14px;
+    filter: brightness(0.95);
+    animation: fadeInZoom 1.2s ease forwards;
+  }
+  @keyframes fadeInZoom {
+    from {opacity: 0; transform: scale(1.1);}
+    to {opacity: 1; transform: scale(1);}
+  }
+  #profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #007bff;
+    margin-top: -75px;
+    object-fit: cover;
+    background: white;
+    box-shadow: 0 0 15px rgba(0,123,255,0.5);
+    transition: box-shadow 0.4s ease;
+  }
+  #profile-photo:hover {
+    box-shadow: 0 0 30px rgba(0,123,255,0.8);
+  }
+  .photo-upload-btn {
+    margin-top: 12px;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    display: none; /* show only admin */
+    transition: background 0.3s ease;
+  }
+  .photo-upload-btn:hover {
+    background: #0056b3;
+  }
+  /* Responsive */
+  @media (max-width: 640px) {
+    #profile-photo {
+      width: 110px;
+      height: 110px;
+      margin-top: -55px;
+      border-width: 4px;
+    }
+    nav {
+      gap: 6px;
+    }
+    nav button {
+      font-size: 0.9rem;
+      padding: 8px 14px;
+    }
   }
 </style>
 </head>
-<body class="norightclick">
+<body>
 
 <header>
   <h1>Mr. Diwash Silwal</h1>
-  <p>M.Sc. Physics | Atmospheric & Biomedical Physics</p>
-  <nav id="nav-buttons" class="hidden">
-    <button onclick="showSection('education')">Education</button>
-    <button onclick="showSection('blogs')">Blogs</button>
-    <button onclick="showSection('research')">Research Papers</button>
-    <button onclick="showSection('notes')">Lecture Notes</button>
-    <button onclick="showSection('projects')">Projects</button>
-    <button onclick="showSection('sidebusiness')">Side Business</button>
-    <button onclick="showSection('externallinks')">External Links</button>
-    <button onclick="logoutAdmin()" style="background:#dc3545;color:#fff;">Logout</button>
-  </nav>
+  <div id="login-area">
+    <input type="text" id="username" placeholder="Username" autocomplete="username" />
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+    <button id="login-btn" onclick="loginAdmin()">Login</button>
+    <button id="logout-btn" onclick="logoutAdmin()" style="display:none;">Logout</button>
+  </div>
 </header>
 
-<!-- Profile Photo -->
-<section id="profile-section" class="hidden">
-  <img id="profile-photo" src="https://via.placeholder.com/140" alt="Profile Photo" />
-  <input type="file" id="profile-upload" accept="image/*" class="hidden" />
-  <button id="change-photo-btn" class="btn-small hidden">Change Photo</button>
-</section>
-
-<!-- Admin Login Form -->
-<section id="admin-login">
-  <h2>Admin Login</h2>
-  <input type="text" id="username" placeholder="Username" autocomplete="username" />
-  <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
-  <button onclick="loginAdmin()">Login</button>
-  <p id="login-error" style="color:#ffcccc; margin-top: 10px; display:none;">Invalid credentials!</p>
-</section>
+<nav id="navbar">
+  <button class="active" onclick="showSection('education', this)">Education</button>
+  <button onclick="showSection('blogs', this)">Blogs</button>
+  <button onclick="showSection('research', this)">Research Papers</button>
+  <button onclick="showSection('notes', this)">Lecture Notes</button>
+  <button onclick="showSection('projects', this)">Projects</button>
+  <button onclick="showSection('sidebusiness', this)">Side Business</button>
+  <button onclick="showSection('externallinks', this)">External Links</button>
+</nav>
 
 <main>
 
-  <!-- Education Section -->
-  <section id="education" class="hidden">
-    <h2>Education
-      <button class="btn-small" onclick="toggleEdit('education-list')">Edit</button>
-    </h2>
+  <div id="profile-cover-container">
+    <img id="cover-photo" src="https://via.placeholder.com/900x220?text=Cover+Photo" alt="Cover Photo" />
+    <br/>
+    <input type="file" id="cover-upload" accept="image/*" style="display:none" />
+    <button id="cover-upload-btn" class="photo-upload-btn" onclick="document.getElementById('cover-upload').click()">Change Cover Photo</button>
+    
+    <img id="profile-photo" src="https://via.placeholder.com/150" alt="Profile Photo" />
+    <br/>
+    <input type="file" id="profile-upload" accept="image/*" style="display:none" />
+    <button id="profile-upload-btn" class="photo-upload-btn" onclick="document.getElementById('profile-upload').click()">Change Profile Photo</button>
+  </div>
+
+  <section id="education">
+    <h2>Education <button class="edit-btn" onclick="toggleEdit('education-list')">Edit</button></h2>
     <ul id="education-list">
-      <li data-visible="true">M.Sc. Physics - Tribhuvan University</li>
-      <li data-visible="true">B.Sc. Physics + Mathematics - Tribhuvan University</li>
-      <li data-visible="false" class="hidden">+2 Science - Damak Multiple Campus</li>
+      <li>M.Sc. Physics - Tribhuvan University</li>
+      <li>B.Sc. Physics + Mathematics - Tribhuvan University</li>
+      <li>+2 Science - Damak Multiple Campus</li>
     </ul>
   </section>
 
-  <!-- Blogs Section -->
-  <section id="blogs" class="hidden">
-    <h2>Blogs
-      <button class="btn-small" onclick="toggleEdit('blogs-list')">Edit</button>
-    </h2>
+  <section id="blogs" style="display:none;">
+    <h2>Blogs <button class="edit-btn" onclick="toggleEdit('blogs-list')">Edit</button></h2>
     <ul id="blogs-list">
-      <li data-visible="true"><strong>Recent Advances in Atmospheric Physics</strong><br/>Published June 2025</li>
-      <li data-visible="false" class="hidden"><strong>Biomedical Physics and Its Applications</strong><br/>Published May 2025</li>
+      <li><strong>Recent Advances in Atmospheric Physics</strong><br/>Published June 2025</li>
+      <li><strong>Biomedical Physics and Its Applications</strong><br/>Published May 2025</li>
     </ul>
   </section>
 
-  <!-- Research Papers Section -->
-  <section id="research" class="hidden">
-    <h2>Research Papers
-      <button class="btn-small" onclick="toggleEdit('research-list')">Edit</button>
-    </h2>
+  <section id="research" style="display:none;">
+    <h2>Research Papers <button class="edit-btn" onclick="toggleEdit('research-list')">Edit</button></h2>
     <ul id="research-list">
-      <li data-visible="true"><a href="#" onclick="alert('PDF preview will open')">Urban Heat Island Effect in Jhapa District (PDF)</a></li>
-      <li data-visible="false" class="hidden"><a href="#">Atmospheric Aerosols and Climate Change (PDF)</a></li>
+      <li><a href="#" onclick="alert('PDF preview not implemented')">Urban Heat Island Effect in Jhapa District (PDF)</a></li>
+      <li><a href="#" onclick="alert('PDF preview not implemented')">Atmospheric Aerosols and Climate Change (PDF)</a></li>
     </ul>
   </section>
 
-  <!-- Lecture Notes Section -->
-  <section id="notes" class="hidden">
-    <h2>Lecture Notes
-      <button class="btn-small" onclick="toggleEdit('notes-list')">Edit</button>
-    </h2>
+  <section id="notes" style="display:none;">
+    <h2>Lecture Notes <button class="edit-btn" onclick="toggleEdit('notes-list')">Edit</button></h2>
     <ul id="notes-list">
-      <li data-visible="true">Thermodynamics - School Level</li>
-      <li data-visible="true">Linear Algebra - +2 Science</li>
-      <li data-visible="false" class="hidden">Quantum Mechanics - B.Sc. Level</li>
+      <li>Thermodynamics - School Level</li>
+      <li>Linear Algebra - +2 Science</li>
+      <li>Quantum Mechanics - B.Sc. Level</li>
     </ul>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="hidden">
-    <h2>Projects
-      <button class="btn-small" onclick="toggleEdit('projects-list')">Edit</button>
-    </h2>
+  <section id="projects" style="display:none;">
+    <h2>Projects <button class="edit-btn" onclick="toggleEdit('projects-list')">Edit</button></h2>
     <ul id="projects-list">
-      <li data-visible="true">Machine Learning for Temperature Prediction<br/>
-        <a href="#" onclick="alert('Video preview will open')">Project Video</a> | 
-        <a href="#" onclick="alert('PDF report will open')">PDF Report</a>
+      <li>Machine Learning for Temperature Prediction<br/>
+          <a href="#" onclick="alert('Video preview not implemented')">Project Video</a> | 
+          <a href="#" onclick="alert('PDF report not implemented')">PDF Report</a>
       </li>
     </ul>
   </section>
 
-  <!-- Side Business Section -->
-  <section id="sidebusiness" class="hidden">
+  <section id="sidebusiness" style="display:none;">
     <h2>Side Business</h2>
     <div>
       <h3>Shree Ambe Bhawani Gharelu Udhyog</h3>
-      <img src="https://via.placeholder.com/140x100?text=Chips" alt="Chips" class="business-img" />
-      <img src="https://via.placeholder.com/140x100?text=Masala" alt="Masala" class="business-img" />
-      <img src="https://via.placeholder.com/140x100?text=Packaging" alt="Packaging" class="business-img" />
+      <img src="https://via.placeholder.com/140x100?text=Chips" alt="Chips" style="border-radius:6px; margin-right:10px;" />
+      <img src="https://via.placeholder.com/140x100?text=Masala" alt="Masala" style="border-radius:6px; margin-right:10px;" />
+      <img src="https://via.placeholder.com/140x100?text=Packaging" alt="Packaging" style="border-radius:6px;" />
       <p>Manufacturer of chips, masala, and packaging products.</p>
     </div>
     <div>
       <h3>RK Traders</h3>
-      <img src="https://via.placeholder.com/140x100?text=Kirana" alt="Kirana" class="business-img" />
+      <img src="https://via.placeholder.com/140x100?text=Kirana" alt="Kirana" style="border-radius:6px;" />
       <p>Kirana Distributor & Dealer.</p>
     </div>
   </section>
 
-  <!-- External Links Section -->
-  <section id="externallinks" class="hidden">
-    <h2>External Links
-      <button class="btn-small" onclick="toggleEdit('links-list')">Edit</button>
-    </h2>
+  <section id="externallinks" style="display:none;">
+    <h2>External Links <button class="edit-btn" onclick="toggleEdit('links-list')">Edit</button></h2>
     <ul id="links-list">
-      <li data-visible="true"><a href="https://scholar.google.com/citations?user=YOUR_USER_ID" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
-      <li data-visible="true"><a href="https://linkedin.com/in/diwash-silwal-44b541243" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-      <li data-visible="false" class="hidden"><a href="https://researchgate.net/profile/diwash_silwal" target="_blank" rel="noopener noreferrer">ResearchGate</a></li>
+      <li><a href="https://scholar.google.com/citations?user=YOUR_USER_ID" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
+      <li><a href="https://linkedin.com/in/diwash-silwal-44b541243" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a href="https://researchgate.net/profile/diwash_silwal" target="_blank" rel="noopener noreferrer">ResearchGate</a></li>
     </ul>
   </section>
 
 </main>
 
 <script>
-  // Simple admin login system (front-end only)
   const ADMIN_USERNAME = 'diwash053';
   const ADMIN_PASSWORD = 'dis@2053';
 
-  // State
-  let isAdmin = false;
+  let loggedIn = false;
 
-  function loginAdmin() {
+  // Section switching & navbar active button
+  function showSection(id, btn) {
+    const sections = ['education','blogs','research','notes','projects','sidebusiness','externallinks'];
+    sections.forEach(sid => {
+      document.getElementById(sid).style.display = sid === id ? 'block' : 'none';
+    });
+    // Active button style
+    document.querySelectorAll('nav button').forEach(b=>{
+      b.classList.remove('active');
+    });
+    if(btn) btn.classList.add('active');
+  }
+  showSection('education'); // default
+
+  // Login
+  function loginAdmin(){
     const u = document.getElementById('username').value.trim();
     const p = document.getElementById('password').value.trim();
-    const err = document.getElementById('login-error');
-    if (u === ADMIN_USERNAME && p === ADMIN_PASSWORD) {
-      isAdmin = true;
-      err.style.display = 'none';
-      document.getElementById('admin-login').classList.add('hidden');
-      document.getElementById('nav-buttons').classList.remove('hidden');
-      document.getElementById('profile-section').classList.remove('hidden');
-      showSection('education');
-      // Show edit buttons for admin
-      showEditButtons(true);
-      // Enable right click and text select for admin only
-      document.body.classList.remove('norightclick');
+    if(u === ADMIN_USERNAME && p === ADMIN_PASSWORD){
+      loggedIn = true;
+      alert('Login successful! Edit mode enabled.');
+      toggleEditButtons(true);
+      togglePhotoUploadButtons(true);
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('login-btn').style.display = 'none';
+      document.getElementById('logout-btn').style.display = 'inline-block';
     } else {
-      err.style.display = 'block';
+      alert('Invalid username or password.');
     }
   }
-
-  function logoutAdmin() {
-    isAdmin = false;
-    document.getElementById('admin-login').classList.remove('hidden');
-    document.getElementById('nav-buttons').classList.add('hidden');
-    document.getElementById('profile-section').classList.add('hidden');
-    hideAllSections();
-    // Hide edit buttons
-    showEditButtons(false);
-    // Disable right click and text select for visitors
-    document.body.classList.add('norightclick');
-    // Clear login form
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
+  // Logout
+  function logoutAdmin(){
+    loggedIn = false;
+    alert('Logged out. Edit mode disabled.');
+    toggleEditButtons(false);
+    togglePhotoUploadButtons(false);
+    document.getElementById('login-btn').style.display = 'inline-block';
+    document.getElementById('logout-btn').style.display = 'none';
   }
 
-  function showSection(id) {
-    hideAllSections();
-    const sec = document.getElementById(id);
-    if (sec) {
-      sec.classList.remove('hidden');
-    }
-  }
-  function hideAllSections() {
-    ['education','blogs','research','notes','projects','sidebusiness','externallinks'].forEach(id => {
-      const sec = document.getElementById(id);
-      if (sec) sec.classList.add('hidden');
+  function toggleEditButtons(show){
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.style.display = show ? 'inline-block' : 'none';
     });
+    if(!show){
+      document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+        el.contentEditable = "false";
+      });
+    }
+  }
+  function togglePhotoUploadButtons(show){
+    document.getElementById('profile-upload-btn').style.display = show ? 'inline-block' : 'none';
+    document.getElementById('cover-upload-btn').style.display = show ? 'inline-block' : 'none';
   }
 
-  // Toggle edit mode for lists
-  function toggleEdit(listId) {
-    if (!isAdmin) return;
-    const list = document.getElementById(listId);
-    if (!list) return;
-    if (list.contentEditable === 'true') {
-      list.contentEditable = 'false';
-      alert('Edit mode disabled. Changes saved in browser session only.');
+  function toggleEdit(listId){
+    if(!loggedIn){
+      alert('Please login as admin to edit.');
+      return;
+    }
+    const el = document.getElementById(listId);
+    if(el.contentEditable === "true"){
+      el.contentEditable = "false";
+      alert('Edit mode disabled. Changes saved temporarily.');
     } else {
-      list.contentEditable = 'true';
-      alert('Edit mode enabled. You can now edit content directly.');
+      el.contentEditable = "true";
+      el.focus();
+      alert('Edit mode enabled. Edit the content and toggle Edit button again to save.');
     }
   }
 
-  // Profile photo change
-  const profileUpload = document.getElementById('profile-upload');
-  const profilePhoto = document.getElementById('profile-photo');
-  const changePhotoBtn = document.getElementById('change-photo-btn');
-
-  changePhotoBtn.addEventListener('click', () => {
-    profileUpload.click();
-  });
-
-  profileUpload.addEventListener('change', (e) => {
+  // Profile photo upload
+  document.getElementById('profile-upload').addEventListener('change', function(e){
     const file = e.target.files[0];
-    if (!file) return;
+    if(!file) return;
     const reader = new FileReader();
-    reader.onload = () => {
-      profilePhoto.src = reader.result;
+    reader.onload = function(ev){
+      document.getElementById('profile-photo').src = ev.target.result;
     };
     reader.readAsDataURL(file);
   });
 
-  // Show change photo button only for admin
-  function showEditButtons(show) {
-    const buttons = document.querySelectorAll('.btn-small');
-    buttons.forEach(btn => {
-      btn.style.display = show ? 'inline-block' : 'none';
-    });
-    changePhotoBtn.style.display = show ? 'inline-block' : 'none';
-  }
-
-  // Initialize page for visitor mode (disable right-click etc)
-  document.body.classList.add('norightclick');
-
-  // Prevent right-click context menu for visitors only
-  document.addEventListener('contextmenu', function(e) {
-    if (!isAdmin) e.preventDefault();
-  });
-
-  // Disable drag and drop of images and text for visitors
-  document.addEventListener('dragstart', function(e) {
-    if (!isAdmin) e.preventDefault();
+  // Cover photo upload
+  document.getElementById('cover-upload').addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      document.getElementById('cover-photo').src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
   });
 </script>
 
